@@ -156,3 +156,89 @@ int main() {
 
     return 0;
 }
+CODE SHOWING A TREE 
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+
+void printInOrder(struct Node* root) {
+    if (root == NULL) return;
+
+    printInOrder(root->left);       // Visit left subtree
+    printf("%d -> ", root->data);   // Visit current node
+    printInOrder(root->right);      // Visit right subtree
+}
+
+int main() {
+    
+    struct Node* root = createNode(1);
+
+    
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+
+    printf("In-order Traversal of the Tree:\n");
+    printInOrder(root);
+    printf("NULL\n");
+
+    return 0;
+}
+CODE SHOWING A GRAPH
+#include <stdio.h>
+
+#define V 4 
+
+
+void init(int arr[V][V]) {
+    for (int i = 0; i < V; i++)
+        for (int j = 0; j < V; j++)
+            arr[i][j] = 0;
+}
+
+void addEdge(int arr[V][V], int i, int j) {
+    arr[i][j] = 1;
+    arr[j][i] = 1; // Because it's undirected
+}
+
+void printMatrix(int arr[V][V]) {
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int adjMatrix[V][V];
+
+    init(adjMatrix);
+    addEdge(adjMatrix, 0, 1);
+    addEdge(adjMatrix, 0, 2);
+    addEdge(adjMatrix, 1, 2);
+    addEdge(adjMatrix, 2, 3);
+
+    printf("Adjacency Matrix Representation:\n");
+    printMatrix(adjMatrix);
+
+    return 0;
+}
+
+
